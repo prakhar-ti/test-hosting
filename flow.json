@@ -1,0 +1,53 @@
+{
+  "processGroups": [
+    {
+      "id": "1a2b3c4d-5e6f-7g8h-9i10-jk1l2m3n4o5p",
+      "name": "Example Flow",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "flow": {
+        "processors": [
+          {
+            "id": "1",
+            "name": "GetFile",
+            "class": "org.apache.nifi.processors.standard.GetFile",
+            "position": {
+              "x": 200,
+              "y": 100
+            },
+            "config": {
+              "Directory": "/path/to/input/directory"
+            }
+          },
+          {
+            "id": "2",
+            "name": "PutFile",
+            "class": "org.apache.nifi.processors.standard.PutFile",
+            "position": {
+              "x": 500,
+              "y": 100
+            },
+            "config": {
+              "Directory": "/path/to/output/directory"
+            }
+          }
+        ],
+        "connections": [
+          {
+            "source": {
+              "id": "1",
+              "relationship": "success"
+            },
+            "destination": {
+              "id": "2",
+              "relationship": "success"
+            },
+            "name": "GetFile to PutFile"
+          }
+        ]
+      }
+    }
+  ]
+}
