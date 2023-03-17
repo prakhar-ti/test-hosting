@@ -1,9 +1,12 @@
 tasks:
-  - name: Check architecture
+  - name: Install AWS SAM
+    init: true
     command: |
-      arch="$(uname -m)"
-      if [ "$arch" = "x86_64" ]; then
-        echo "Running on x86 architecture"
-      else
-        echo "Running on ARM architecture"
+      ARCH=$(uname -m)
+      if [ "$ARCH" = "x86_64" ]; then
+        curl -Lo sam.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+      elif [ "$ARCH" = "aarch64" ]; then
+        curl -Lo sam.zip https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-aarch64.zip
       fi
+      unzip -q sam.zip -d sam
+      sudo ./sam/install
