@@ -1,0 +1,9 @@
+tasks:
+  - name: Check architecture
+    command: |
+      arch="$(uname -m)"
+      if [ "$arch" = "x86_64" ]; then
+        echo "Running on x86 architecture"
+      else
+        echo "Running on ARM architecture"
+      fi
